@@ -217,22 +217,20 @@ body {
 .card-body h3 { font-size: 0.95rem; color: #2c3e50; }
 .card-meta { font-size: 0.75rem; color: #95a5a6; margin-top: 0.2rem; }
 
-.card-new {
-  font-size: 0.7rem;
-  color: #fff;
-  background: #3498db;
-  padding: 0.2rem 0.6rem;
-  border-radius: 3px;
-  display: inline-block;
-  margin: 0.6rem 0 0 0.6rem;
-}
-
 .card-cover {
   background: #e8f4f8;
-  height: 110px;
+  height: 160px;
+  overflow: hidden;
   display: flex;
-  align-items: flex-end;
-  padding: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .book-footer {

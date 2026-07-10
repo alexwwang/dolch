@@ -10,16 +10,15 @@
     <h2>故事列表</h2>
     <div class="story-grid">
       {{ range .Pages.ByWeight }}
+      {{ $sid := .Params.story_id }}
       <a href="{{ .RelPermalink }}" class="story-card">
         <div class="card-cover">
-          {{ $firstImg := "" }}
-          {{ with .Params.new_words }}
-          <p class="card-new">新词: {{ delimit . ", " }}</p>
-          {{ end }}
+          <img src="/images/{{ $sid }}/cover.png" alt="{{ .Title }}" class="card-cover-img" loading="lazy">
         </div>
         <div class="card-body">
           <h3>{{ .Title }}</h3>
-          <p class="card-meta">{{ .Params.total_pages }} 页 · {{ .Params.total_words }} 词</p>
+          <p class="card-meta">{{ .Params.total_pages }} 页 · {{ .Params.total_words }} 词 · 
+          {{ with .Params.new_words }}新词: {{ delimit . ", " }}{{ end }}</p>
         </div>
       </a>
       {{ end }}
