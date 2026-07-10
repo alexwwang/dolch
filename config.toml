@@ -1,0 +1,10 @@
+baseURL = "/"
+languageCode = "zh-CN"
+title = "Dolch Level PP 绘本系列"
+defaultContentLanguage = "zh"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "robotsTXT"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

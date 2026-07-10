@@ -1,0 +1,76 @@
+{{ define "main" }}
+<main class="book-main">
+  <header class="story-header">
+    <a href="{{ .Parent.RelPermalink }}" class="back-link">&larr; 返回系列</a>
+    <h1>{{ .Title }}</h1>
+  </header>
+
+  <div class="flip-viewport">
+    <div class="flip-pages">
+      {{ .Content }}
+    </div>
+
+    <div class="flip-bar">
+      <button class="flip-btn flip-prev" onclick="flip(-1)" disabled aria-label="上一页">◀</button>
+      <span class="flip-indicator" id="flipCur">1</span>
+      <span class="flip-sep">/</span>
+      <span class="flip-indicator" id="flipTotal">{{ .Params.total_pages }}</span>
+      <button class="flip-btn flip-next" onclick="flip(1)" aria-label="下一页">▶</button>
+    </div>
+  </div>
+
+  <footer class="story-footer">
+    <h3>词汇学习</h3>
+    <ul>
+      <li><strong>新词</strong>: {{ delimit .Params.new_words ", " }}</li>
+      {{ with .Params.repetition_words }}
+      <li><strong>复现词</strong>: {{ delimit . ", " }}</li>
+      {{ end }}
+      <li><strong>全篇词数</strong>: {{ .Params.total_words }} 词 / {{ .Params.total_pages }} 页</li>
+    </ul>
+    <nav class="story-nav-bottom">
+      {{ with .NextInSection }}
+      <a href="{{ .RelPermalink }}" class="nav-prev">&larr; {{ .Title }}</a>
+      {{ end }}
+      <a href="{{ .Parent.RelPermalink }}">目录</a>
+      {{ with .PrevInSection }}
+      <a href="{{ .RelPermalink }}" class="nav-next">{{ .Title }} &rarr;</a>
+      {{ end }}
+    </nav>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var pages = document.querySelectorAll('.story-page');
+  var total = pages.length;
+  var cur = 0;
+  document.getElementById('flipTotal').textContent = total;
+
+  function show(i) {
+    if (i < 0) i = 0;
+    if (i >= total) i = total - 1;
+    pages.forEach(function(p, idx) {
+      p.classList.toggle('active', idx === i);
+    });
+    document.getElementById('flipCur').textContent = i + 1;
+    document.querySelector('.flip-prev').disabled = i === 0;
+    document.querySelector('.flip-next').disabled = i === total - 1;
+    cur = i;
+  }
+
+  window.flip = function(d) { show(cur + d); };
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur - 1); }
+    if ((e.key === 'r' || e.key === 'R') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      var btn = pages[cur].querySelector('.tts-btn');
+      if (btn) { btn.click(); }
+    }
+  });
+
+  show(0);
+})();
+</script>
+{{ end }}

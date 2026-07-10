@@ -1,0 +1,252 @@
+/* pp-storybook.css — page-flip edition */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: #f4f0eb;
+  color: #2c3e50;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* --- Header --- */
+.book-header, .story-header {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 0.5rem;
+  text-align: center;
+}
+.book-header h1 { font-size: 1.8rem; color: #c0392b; font-family: 'Nunito', 'Noto Sans SC', sans-serif; font-weight: 700; }
+.book-subtitle { font-size: 0.95rem; color: #7f8c8d; margin-top: 0.3rem; }
+.book-desc { font-size: 0.85rem; color: #95a5a6; margin-top: 0.2rem; }
+.back-link {
+  display: inline-block; margin-bottom: 0.3rem;
+  color: #3498db; text-decoration: none; font-size: 0.8rem;
+}
+.story-header h1 {
+  font-size: 1.3rem; color: #2c3e50;
+  border-bottom: 2px solid #f39c12; padding-bottom: 0.4rem;
+  font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+}
+
+/* --- Page-flip viewport --- */
+.flip-viewport {
+  max-width: 640px;
+  margin: 0.8rem auto;
+  padding: 0 0.8rem;
+}
+
+.flip-pages { position: relative; }
+
+.story-page {
+  display: none;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  overflow: hidden;
+}
+
+.story-page.active {
+  display: block;
+  animation: fadeSlideIn 0.25s ease-out;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* --- Image area with page number overlay --- */
+.page-illustration {
+  position: relative;
+  width: 100%;
+  background: #faf8f5;
+}
+
+.page-illustration img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-size: 0.75rem;
+  color: #fff;
+  background: rgba(0,0,0,0.35);
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-family: 'Nunito', 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+  font-weight: 700;
+}
+
+/* --- Text area --- */
+.page-text {
+  padding: 0.8rem 1rem 0.6rem;
+}
+
+.story-dialogue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #2c3e50;
+  font-family: 'Source Serif 4', 'Georgia', 'Times New Roman', serif;
+}
+
+.dialogue-text {
+  flex: 1;
+}
+
+.dialogue-text strong { color: #e74c3c; font-weight: 700; }
+
+/* --- TTS button inline at end of text --- */
+.tts-btn {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #3498db;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.7rem;
+  color: #3498db;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.tts-btn:hover { background: #3498db; color: #fff; }
+.tts-btn.speaking { background: #e74c3c; border-color: #e74c3c; color: #fff; }
+
+/* --- Flip bar --- */
+.flip-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem;
+  background: #fff;
+  border-top: 1px solid #eee;
+}
+
+.flip-btn {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #bdc3c7;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  font-family: 'Nunito', sans-serif;
+}
+
+.flip-btn:hover:not(:disabled) { border-color: #3498db; color: #3498db; background: #f0f7ff; }
+.flip-btn:disabled { opacity: 0.3; cursor: default; }
+
+.flip-indicator {
+  font-size: 0.95rem;
+  color: #2c3e50;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.flip-sep { color: #bdc3c7; font-size: 0.95rem; }
+
+/* --- Vocabulary footer --- */
+.story-footer {
+  max-width: 640px;
+  margin: 1rem auto;
+  padding: 1rem 1.2rem;
+  background: #f8f6f3;
+  border-radius: 8px;
+}
+
+.story-footer h3 { font-size: 0.95rem; margin-bottom: 0.4rem; color: #7f8c8d; }
+.story-footer ul { list-style: none; }
+.story-footer li { padding: 0.15rem 0; font-size: 0.85rem; color: #555; }
+.story-footer li strong { color: #2c3e50; }
+
+.story-nav-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid #ddd;
+}
+
+.story-nav-bottom a { color: #3498db; text-decoration: none; font-size: 0.85rem; }
+.story-nav-bottom a:hover { text-decoration: underline; }
+
+/* --- List page --- */
+.story-index { max-width: 700px; margin: 1.5rem auto; padding: 0 1rem; }
+.story-index h2 { font-size: 1.1rem; margin-bottom: 1rem; color: #7f8c8d; }
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.8rem;
+}
+
+.story-card {
+  display: block;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s, box-shadow 0.15s;
+  overflow: hidden;
+}
+
+.story-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+
+.card-body { padding: 0.8rem; }
+.card-body h3 { font-size: 0.95rem; color: #2c3e50; }
+.card-meta { font-size: 0.75rem; color: #95a5a6; margin-top: 0.2rem; }
+
+.card-new {
+  font-size: 0.7rem;
+  color: #fff;
+  background: #3498db;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 0.6rem 0 0 0.6rem;
+}
+
+.card-cover {
+  background: #e8f4f8;
+  height: 110px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.5rem;
+}
+
+.book-footer {
+  max-width: 700px;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #95a5a6;
+}
+
+/* --- Responsive fine-tuning --- */
+@media (min-width: 480px) {
+  .story-header h1 { font-size: 1.5rem; }
+  .story-dialogue { font-size: 1.3rem; }
+  .page-text { padding: 1rem 1.5rem 0.8rem; }
+}

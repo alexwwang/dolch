@@ -1,0 +1,16 @@
+{{- $image := .Get "image" -}}
+{{- $page := .Get "page" -}}
+{{- $text := .Inner | .Page.RenderString -}}
+{{- $plain := .Inner | .Page.RenderString | plainify | htmlUnescape | replaceRE `\s+` ` ` -}}
+<div class="story-page">
+  <div class="page-illustration">
+    <img src="/images/{{ $image }}" alt="" loading="lazy" width="1024" height="1024">
+    <span class="page-number">Page {{ $page }}</span>
+  </div>
+  <div class="page-text">
+    <div class="story-dialogue">
+      <span class="dialogue-text">{{ $text }}</span>
+      <button class="tts-btn" data-text="{{ $plain }}" title="Listen">&#9654;</button>
+    </div>
+  </div>
+</div>
