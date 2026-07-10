@@ -61,6 +61,7 @@
 
   window.flip = function(d) { show(cur + d); };
 
+  // Keyboard
   document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur - 1); }
@@ -69,6 +70,28 @@
       if (btn) { btn.click(); }
     }
   });
+
+  // Touch swipe
+  var touchStartX = 0;
+  var touchStartY = 0;
+  var handled = false;
+
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+    handled = false;
+  }, {passive: true});
+
+  document.addEventListener('touchmove', function(e) {
+    if (handled) return;
+    var dx = e.changedTouches[0].screenX - touchStartX;
+    var dy = e.changedTouches[0].screenY - touchStartY;
+    if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      handled = true;
+      if (dx < 0) show(cur + 1);
+      else show(cur - 1);
+    }
+  }, {passive: true});
 
   show(0);
 })();
