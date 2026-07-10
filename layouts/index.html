@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dolch 高频词绘本系列</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+      background: #f4f0eb;
+      color: #2c3e50;
+      min-height: 100vh;
+    }
+    .container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+
+    /* Header */
+    header { text-align: center; margin-bottom: 2.5rem; }
+    header h1 { font-size: 2rem; color: #c0392b; font-family: Nunito, 'Noto Sans SC', sans-serif; }
+    header p { margin-top: 0.6rem; color: #7f8c8d; font-size: 0.95rem; line-height: 1.7; }
+    .characters { margin-top: 1rem; font-size: 0.9rem; color: #95a5a6; }
+
+    /* Level cards */
+    .level-list { display: flex; flex-direction: column; gap: 1rem; }
+
+    .level-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .level-card.active:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .level-card.disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .level-badge {
+      flex-shrink: 0;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #fff;
+      font-family: Nunito, sans-serif;
+    }
+
+    .badge-pp { background: #e74c3c; }
+    .badge-p  { background: #e67e22; }
+    .badge-1  { background: #f39c12; }
+    .badge-2  { background: #27ae60; }
+    .badge-3  { background: #2980b9; }
+
+    .level-info { flex: 1; }
+    .level-name { font-size: 1.1rem; font-weight: 700; }
+    .level-desc { font-size: 0.82rem; color: #7f8c8d; margin-top: 0.2rem; line-height: 1.5; }
+    .level-stats {
+      display: flex; gap: 0.6rem; margin-top: 0.3rem;
+      font-size: 0.75rem; color: #95a5a6;
+    }
+    .level-stats span {
+      background: #f0f0f0; padding: 1px 8px; border-radius: 8px;
+    }
+
+    .level-status {
+      flex-shrink: 0;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .status-ready { background: #e8f8f5; color: #27ae60; }
+    .status-soon  { background: #f0f0f0; color: #95a5a6; }
+
+    footer {
+      text-align: center; margin-top: 2.5rem;
+      font-size: 0.8rem; color: #95a5a6;
+    }
+
+    @media (max-width: 480px) {
+      .level-card { padding: 1rem; gap: 0.8rem; }
+      .level-badge { width: 48px; height: 48px; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Dolch 高频词绘本系列</h1>
+      <p>从 Pre-Primer 到 Grade 3，三个小伙伴带你一步步学会英语高频词</p>
+      <p class="characters">Sam &#x1F431; · Pip &#x1F426; · Ben &#x1F436;</p>
+    </header>
+
+    <div class="level-list">
+      <!-- PP — 已完成 -->
+      <a href="/pp-storybook/" class="level-card active">
+        <div class="level-badge badge-pp">PP</div>
+        <div class="level-info">
+          <div class="level-name">Pre-Primer · 学前期</div>
+          <div class="level-desc">最简单的基础高频词，每句 3-5 个词。10 个故事，71 页全彩插画。</div>
+          <div class="level-stats"><span>40 词</span><span>10 故事</span><span>已上线</span></div>
+        </div>
+        <div class="level-status status-ready">可阅读</div>
+      </a>
+
+      <!-- Primer — 未完成 -->
+      <div class="level-card disabled">
+        <div class="level-badge badge-p">P</div>
+        <div class="level-info">
+          <div class="level-name">Primer · 初级</div>
+          <div class="level-desc">扩展到 52 个新词，每句 5-7 个词。开始出现简单过去时和对话。</div>
+          <div class="level-stats"><span>52 词</span><span>10 故事</span><span>规划中</span></div>
+        </div>
+        <div class="level-status status-soon">即将推出</div>
+      </div>
+
+      <!-- Grade 1 — 未完成 -->
+      <div class="level-card disabled">
+        <div class="level-badge badge-1">G1</div>
+        <div class="level-info">
+          <div class="level-name">Grade 1 · 一年级</div>
+          <div class="level-desc">41 个新词，多轮对话和复合句萌芽。故事更长，每篇 120-200 词。</div>
+          <div class="level-stats"><span>41 词</span><span>10 故事</span><span>规划中</span></div>
+        </div>
+        <div class="level-status status-soon">即将推出</div>
+      </div>
+
+      <!-- Grade 2 — 未完成 -->
+      <div class="level-card disabled">
+        <div class="level-badge badge-2">G2</div>
+        <div class="level-info">
+          <div class="level-name">Grade 2 · 二年级</div>
+          <div class="level-desc">46 个新词，短段落和因果逻辑。每篇 200-300 词，稳定使用过去时。</div>
+          <div class="level-stats"><span>46 词</span><span>10 故事</span><span>规划中</span></div>
+        </div>
+        <div class="level-status status-soon">即将推出</div>
+      </div>
+
+      <!-- Grade 3 — 未完成 -->
+      <div class="level-card disabled">
+        <div class="level-badge badge-3">G3</div>
+        <div class="level-info">
+          <div class="level-name">Grade 3 · 三年级</div>
+          <div class="level-desc">41 个新词，多时态混合和复杂叙事。每篇 300-400 词，连贯段落。</div>
+          <div class="level-stats"><span>41 词</span><span>10 故事</span><span>规划中</span></div>
+        </div>
+        <div class="level-status status-soon">即将推出</div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Dolch 220 高频词 · 5 个等级 · 50 个故事 · 核心角色：Sam · Pip · Ben</p>
+    </footer>
+  </div>
+</body>
+</html>
