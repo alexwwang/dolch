@@ -88,8 +88,13 @@
     var dy = e.changedTouches[0].screenY - touchStartY;
     if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy) * 1.5) {
       handled = true;
-      if (dx < 0) show(cur + 1);
-      else show(cur - 1);
+      if (dx < 0) {
+        if (cur < total - 1) show(cur + 1);
+        else { var n = document.querySelector('.nav-next'); if (n) location.href = n.getAttribute('href'); }
+      } else {
+        if (cur > 0) show(cur - 1);
+        else { var p = document.querySelector('.nav-prev'); if (p) location.href = p.getAttribute('href'); }
+      }
     }
   }, {passive: true});
 
