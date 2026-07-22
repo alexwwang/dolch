@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  // Hold reference to prevent GC mid-speech
+  var currentUtterance = null;
+
   function getEnVoice() {
     var voices = window.speechSynthesis.getVoices();
     return voices.find(function(v) { return v.lang.startsWith('en'); });
@@ -40,25 +43,26 @@
 
     function speakNext() {
       if (idx >= chunks.length) {
+        currentUtterance = null;
         btn.classList.remove('speaking');
         return;
       }
       var chunk = chunks[idx];
-      var utt = new SpeechSynthesisUtterance(chunk.text);
-      utt.lang = 'en-US';
-      utt.rate = 0.75;
-      utt.pitch = 1.1;
-      if (voice) utt.voice = voice;
-      utt.onend = function() {
+      currentUtterance = new SpeechSynthesisUtterance(chunk.text);
+      currentUtterance.lang = 'en-US';
+      currentUtterance.rate = 0.75;
+      currentUtterance.pitch = 1.1;
+      if (voice) currentUtterance.voice = voice;
+      currentUtterance.onend = function() {
         idx++;
-        // Pause between sentences
         if (idx < chunks.length) {
           setTimeout(speakNext, chunks[idx - 1].pause);
         } else {
+          currentUtterance = null;
           btn.classList.remove('speaking');
         }
       };
-      window.speechSynthesis.speak(utt);
+      window.speechSynthesis.speak(currentUtterance);
     }
 
     speakNext();
@@ -71,6 +75,7 @@
     if (!text) return;
 
     window.speechSynthesis.cancel();
+    currentUtterance = null;
     btn.classList.add('speaking');
     speakText(text, btn);
   });
