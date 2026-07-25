@@ -1,0 +1,32 @@
+{{ define "main" }}
+<main class="book-main">
+  <header class="book-header">
+    <h1>{{ .Title }}</h1>
+    <p class="book-subtitle">Dolch Primer Sight Words · Level P</p>
+    <p class="book-desc">{{ .Description }}</p>
+  </header>
+
+  <section class="story-index">
+    <h2>故事列表</h2>
+    <div class="story-grid">
+      {{ range .Pages.ByWeight }}
+      {{ $sid := .Params.story_id }}
+      <a href="{{ .RelPermalink }}" class="story-card">
+        <div class="card-cover">
+          <img src="/images/p/{{ $sid }}/cover.jpg" alt="{{ .Title }}" class="card-cover-img" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3>{{ .Title }}</h3>
+          <p class="card-meta">{{ .Params.total_pages }} 页 · {{ .Params.total_words }} 词 · 
+          {{ with .Params.new_words }}新词: {{ delimit . ", " }}{{ end }}</p>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </section>
+
+  <footer class="book-footer">
+    <p>Dolch Level P 绘本系列 · 10 个故事 · 52 个高频词</p>
+  </footer>
+</main>
+{{ end }}
