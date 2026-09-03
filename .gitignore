@@ -8,3 +8,6 @@ Thumbs.db
 
 # Hugo
 .hugo_build.lock
+
+# Agent work files (kept local, never pushed)
+.prompts/
